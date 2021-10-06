@@ -4,7 +4,6 @@ linktitle: Überschrift 1
 menu:
   main:
     parent: Tutorials
-prev: /tutorials/mathjax
 title: Überschrift 1
 weight: 10
 ---
