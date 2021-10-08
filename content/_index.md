@@ -14,4 +14,3 @@ Goal is to establish a standard for testing definition which can easily be used 
 * **Simple**: Develop and apply testcases can be performed by nearby everyone
 * **Flexible**: The concept is not restricted to technical platforms. It's explicitly designed for extension. 
 * **Modern**: Testcases are designed in JSON, which is simple to read and supported by a wide range of technologies. This allows a simple integration into new and already existing tools.
-* 
