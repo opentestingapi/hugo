@@ -10,7 +10,7 @@ In addition, a few meta information to identify the test case has to be added. W
 
 ```json
 {
-  "opentestapi": "0.1",
+  "testapi": "0.1",
   "id": "hello_world_test",
   "description": "my first hello world test, showing how its working",
   "injections": [
@@ -21,7 +21,7 @@ In addition, a few meta information to identify the test case has to be added. W
   ]
 }
 ```
-* `opentestapi` : Version of the opentestingapi your test case is written in.
+* `testapi` : Version of the opentestapi your test case is written in.
 * `id` : A testing tool can manage test cases using this identifier. 
 * `description`: We humans usually need some help. Let's add a short description for us.
 

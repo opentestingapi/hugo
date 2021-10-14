@@ -2,7 +2,7 @@ baseURL = "https://example.com"
 
 languageCode = "en-us"
 DefaultContentLanguage = "en"
-title = "OpenTestingAPI"
+title = "OpenTestAPI"
 theme = "hugo-theme-techdoc"
 
 hasCJKLanguage = true
