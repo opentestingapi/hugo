@@ -54,14 +54,12 @@ checks | [Checks Object]({{< ref "#checks-object" >}}) | The set of check object
 
 #### TestAPI Version String
 The version string signifies the version of the TestAPI Specification that the document complies to. 
-The format for this string must be major.minor.patch. 
-The patch may be suffixed by a hyphen and extra alphanumeric characters.
+The format for this string must be major.minor. 
 
 A major.minor shall be used to designate the TestAPI Specification version, and will be considered compatible with the TestAPI Specification specified by that major.minor version. 
-The patch version will not be considered by tooling, making no distinction between 1.0.0 and 1.0.1.
 
 In subsequent versions of the TestAPI Specification, care will be given such that increments of the minor version should not interfere with operations of tooling developed to a lower minor version. 
-Thus a hypothetical 1.1.0 specification should be usable with tooling designed for 1.0.0.
+Thus a hypothetical 1.1 specification should be usable with tooling designed for 1.0.
 
 #### Identifier
 This field represents a unique universal identifier.
