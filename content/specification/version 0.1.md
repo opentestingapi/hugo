@@ -166,7 +166,7 @@ d | days
 {
   "maxwaitime": "60",
   "maxwaitime": "60s",
-  "maxwaitime": "1min",
+  "maxwaitime": "1m",
 }
 ```
 
