@@ -28,10 +28,10 @@ The current state of the Open-Test-API supports the following service to interac
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-kafka | [Kafka Object]({{< ref "#kafka-object" >}}) | Apache Kafka is a framework implementation of a software bus using stream-processing.
+Kafka | [Kafka Service Object]({{< ref "#kafka-service-object" >}}) | Apache Kafka is a framework implementation of a software bus using stream-processing.
+SQL Database | [Database Service Object]({{< ref "#sql-database-object" >}}) | | 
+REST | [REST Service Object]({{< ref "#rest-service-object" >}}) | |
 cassandra | |
-oracle | | 
-rest | |
 
 Services can be part as well as of Injects and Checks. 
 
@@ -276,3 +276,64 @@ A more complex example combines several generators:
 This will pick a value out of the list "v1, v2, v3, v5" and append a random value between 0 and 99.  
 
 #### Kafka Object
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+broker | String |
+user | String |
+password | Base64String | 
+topic | String |
+group | String | 
+header | [Filename]({{< ref "#filename" >}}) |
+
+```json
+{
+    "kafka": {
+        "broker":"myservername",
+        "username": "myusername",
+        "password": "mypassword",
+        "topic": "mytopic",
+        "group": "mygroup",
+        "header" : "load_from_file.json"        
+    }
+}
+```
+
+#### REST Service Object
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+url | String |
+user | String |
+password | Base64String |
+header | [Filename]({{< ref "#filename" >}}) |
+
+```json
+{
+    "rest": {
+        "url":"type=POST;url=http://localhost:50000/dummy/post",
+        "username": "myusername",
+        "password": "mypassword",        
+        "header" : "load_from_file.json"        
+    }
+}
+```
+
+#### SQL Database Object
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+url | String |
+user | String |
+password | Base64String |
+header | [Filename]({{< ref "#filename" >}}) |
+
+```json
+{
+    "rest": {
+        "url":"jdbc:oracle:thin:@localhost:1521/XE",
+        "username": "myusername",
+        "password": "mypassword"        
+    }
+}
+```
