@@ -12,9 +12,9 @@ weight: 10
 
 ## Disclaimer
 Part of this content has been taken from the great work done by the folks at the
-<a href="https://www.asyncapi.com/docs/getting-started">[AsyncAPI]</a>.
-Initiative and the 
-<a href="https://github.com/OAI/OpenAPI-Specification">[OpenAPI]</a>.
+<a href="https://www.asyncapi.com/docs/getting-started">[AsyncAPI]</a> 
+initiative and the 
+<a href="https://github.com/OAI/OpenAPI-Specification">[OpenAPI]</a> initiative.
 
 
 ## Introduction
@@ -88,9 +88,11 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 injectid |  [Identifier]({{< ref "#identifier" >}}) | **Required** A unique Identifier, which allows to connect an inject with several checks.   
 service |  [Services]({{< ref "#service" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
-checks | [Check Objects]({{< ref "#check-object" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
+checks | [Checks]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
 cron | [Cron Triggers]({{< ref "#cron trigger" >}}) | The execution time of a job
+timetolive | [Time Duration Object]({{< ref "#time-duration-object" >}}) | Based on the continuous execution approach, a test case will be executed endless. `timtolive` defines how long the test cases has to be executed by the test tool once it was started. If nothing is defined, the assumption will be that the test cases is executed endless based on the cron job. 
 sourcefile | [Filename]({{< ref "#filename" >}}) | The data source for the inject. The complete data of this file will be taken ans input for the SUT.
+randomgenerator | [Random Generator Object]({{< ref "#random-generator-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values thrue the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
 
 #### Checks Object
 The checks object is a map of [Check Objects]({{< ref "#check-object" >}})
@@ -104,6 +106,21 @@ service | [Services]({{< ref "#service" >}})  | **Required** the service (interf
 expectedfile | [Filename]({{< ref "#filename" >}}) | The data source for the check object. The complete data of this file will be taken ans output validation for the SUT.
 checktype | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, ... . See [Check Type Definition]({{< ref "#check-type-definition" >}}) 
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
+active | String | activate (TRUE) /deactivate (FALSE) a test case. Per default a testing tool will set a test case always as activated and execute it once, the test case was deployed.
+
+#### Checks
+```text
+{
+    "checks": [ "kafka:check1", "kafka:check2", "oracle:check1"]
+}
+```
+
+A set of `checkids`, describing the checks executed after the inject was triggered.
+
+**EXAMPLE**
+```json
+
+```
 
 #### Check Type Definition
 The Open-Test-API supports the following types of validation:
@@ -168,7 +185,94 @@ d | days
 }
 ```
 
+#### Random Generator Object
+It's possible to inject random generated data into the input object and validate the output object for this generated date. 
+All in all, with this approach its possible to trace objects during a complex SUT overall several subsystems. 
+A random generator object is a set of  
+
+#### Replacement Rules
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+replacements | [Replacement Rules]({{< ref "#replacement-rules" >}}) | A set of replacements.
+
+#### Replacement Rules
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
+value | [[Replacement Value]({{< ref "#replacement-value" >}}) ] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
+
+#### Replacement value 
+The description of a single value looks as follows
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
+type | String | Defines the way how to generate random values. Type and its parameters are described in the next table. 
+param | String | Parameter object for the random generator.
+
+The following types are supported by the OpenTestApi Definition
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+now | String | Value will be the current timestamp (+an additional delay) in the given format. Parameter (param) accepts (+[delay]({{< ref "#time-duration-object" >}}))
+list | String | List of Pipe ("\|") separated values, which can be picked randomly for the value. The values are grabbed evenly distributed. 
+regex | String | Random generated value matching the regular expression
+file | [Filename]({{< ref "#filename" >}}) | The file contains a set of values, which are randomly chosen. One value per line.
 
 
+**EXAMPLES**
+
+A simple timestamp example:
+
+```json
+"replacements" : [
+{
+    "key" : "#key1#",
+    "value": [{        
+        "now": "yyyy-MM-dd HH:mm:ss",
+        "param" : "+1h"
+    }]   
+}]
+```
+
+This will generate a replacement value, which generates a timestamp with one hour in the future. That is, your inject job will be done at 10am, the generated value will be 11am.
+
+```json
+"replacements" : [
+{
+    "key" : "#key1#",
+    "value": [{        
+        "list": "v1|v2|v3|v5"
+    }]   
+}]
+```
+The generator will pick random one of the values out of the list given as param.
+
+```json
+"replacements" : [
+{
+    "key" : "#key1#",
+    "value": [{        
+        "regex": "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+    }],        
+}]
+```
+This regex generates a UUID in format v4.
+
+A more complex example combines several generators:
+```json
+"replacements" : [
+{
+    "key" : "#key1#",
+    "value": [{
+        "order": 1,
+        "list": "v1|v2|v3|v5"
+    },{
+        "order": 2,
+        "regex": "^_[0-9]{2}$"
+    }]            
+}]
+```
+This will pick a value out of the list "v1, v2, v3, v5" and append a random value between 0 and 99.  
 
 #### Kafka Object
