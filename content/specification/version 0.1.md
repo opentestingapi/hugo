@@ -136,7 +136,7 @@ The Cron Trigger is a comma-separated list of cron jobs. The cron job definition
 The following examples will trigger the data inject every hour 5 and 15 minutes after the full hour.  
 
 **EXAMPLE**
-```text
+```json
 {
     "cron" : [ "5 * * * * ?" , "15 * * * * ?"], 
 }
@@ -275,26 +275,27 @@ A more complex example combines several generators:
 ```
 This will pick a value out of the list "v1, v2, v3, v5" and append a random value between 0 and 99.  
 
-#### Kafka Object
+#### Kafka Service Object
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-broker | String |
-user | String |
-password | Base64String | 
-topic | String |
-group | String | 
-header | [Filename]({{< ref "#filename" >}}) |
+broker | String | **Required** The url of the kafka broker, you will connect to.
+user | String | In case of authentification, the username.
+password | Base64String | The password for the authentification.
+topic | String | The topic you want connect to.
+group | String | If your consumes data from a topic, you have to define a group id. Keep in mind: Don't use the same consumer group, which is already in use by other service. Otherwise, your testing system will steel messages from your other system. Best practice: Create an own consumer group only for testing purposes with minimal rights. 
+header | [Filename]({{< ref "#filename" >}}) | In case your System under test requires a kafka header to work, place it here. 
 
+**EXAMPLE**
 ```json
 {
     "kafka": {
         "broker":"myservername",
         "username": "myusername",
-        "password": "mypassword",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
         "topic": "mytopic",
         "group": "mygroup",
-        "header" : "load_from_file.json"        
+        "header" : "myExampleHeader.json"        
     }
 }
 ```
@@ -323,15 +324,15 @@ header | [Filename]({{< ref "#filename" >}}) |
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-url | String |
+connect | String |
 user | String |
 password | Base64String |
 header | [Filename]({{< ref "#filename" >}}) |
 
 ```json
 {
-    "rest": {
-        "url":"jdbc:oracle:thin:@localhost:1521/XE",
+    "database": {
+        "connect":"jdbc:oracle:thin:@localhost:1521/XE",
         "username": "myusername",
         "password": "mypassword"        
     }
