@@ -16,28 +16,9 @@ Part of this content has been taken from the great work done by the folks at the
 initiative and the 
 <a href="https://github.com/OAI/OpenAPI-Specification">[OpenAPI]</a> initiative.
 
-
 ## Introduction
 
-## Definitions
-
-### Services
-
-A SUT can have several interfaces to interact. 
-The current state of the Open-Test-API supports the following service to interact with:
-
-FIELD NAME   | TYPE          | DESCRIPTION
------------- | ------------- | -------------
-Kafka | [Kafka Service Object]({{< ref "#kafka-service-object" >}}) | Apache Kafka is a framework implementation of a software bus using stream-processing.
-SQL Database | [Database Service Object]({{< ref "#sql-database-object" >}}) | | 
-REST | [REST Service Object]({{< ref "#rest-service-object" >}}) | |
-cassandra | |
-
-Services can be part as well as of Injects and Checks. 
-
 ## Specification
-### Format
-### File Structure
 ### Schema
 #### OpenTestAPI Object
 
@@ -67,12 +48,12 @@ The format is in general free, but it can be used to package test cases to tests
 Good practice is to follow the URI format, according to <a href="https://tools.ietf.org/html/rfc3986">RFC3986</a>.
 
 **EXAMPLE**
-```text
+```json
 {
     "id": "myproject:myexampleapplication:E2E:test1" 
 }
 ```
-```text
+```json
 {
     "id": "myproject:myexampleapplication:E2E:test1:kafka:inject:mymessage" 
 }
@@ -87,12 +68,82 @@ The injects object is a map of [Injection Objects]({{< ref "#injection-object" >
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 injectid |  [Identifier]({{< ref "#identifier" >}}) | **Required** A unique Identifier, which allows to connect an inject with several checks.   
-service |  [Services]({{< ref "#service" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
+service |  [Service Object]({{< ref "#service-object" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
 checks | [Checks]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
 cron | [Cron Triggers]({{< ref "#cron trigger" >}}) | The execution time of a job
 timetolive | [Time Duration Object]({{< ref "#time-duration-object" >}}) | Based on the continuous execution approach, a test case will be executed endless. `timtolive` defines how long the test cases has to be executed by the test tool once it was started. If nothing is defined, the assumption will be that the test cases is executed endless based on the cron job. 
 sourcefile | [Filename]({{< ref "#filename" >}}) | The data source for the inject. The complete data of this file will be taken ans input for the SUT.
 randomgenerator | [Random Generator Object]({{< ref "#random-generator-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values thrue the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
+
+#### Service Object
+
+A SUT can have several interfaces to interact.
+Services can be part as well as of Injects and Checks.
+
+A service has the following fields
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+type | String | **Required** The definition of the service type.
+connectstring | String | **Required** The connect string for the service
+user | String | In case of authentication, the username.
+password | Base64String | The password for the authentication.
+custom | [(String, String)] | A service can have custom configurations, e.g. topics etc. The custom list allows the simple configuration via key/value pairs. 
+
+The current state of the Open-Test-API supports the following services:
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+Kafka | [Kafka Service Object]({{< ref "#kafka-service-object" >}}) | Apache Kafka is a framework implementation of a software bus using stream-processing.
+SQL Database | [Database Service Object]({{< ref "#sql-database-object" >}}) | | 
+REST | [REST Service Object]({{< ref "#rest-service-object" >}}) | |
+cassandra | |
+
+#### Kafka Service Object
+
+**EXAMPLE**
+```json
+{
+    "service": {
+        "type": "kafka",
+        "connectstring":"mykafkabroker.com",
+        "username": "myusername",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",        
+        "custom": {
+          "topic": "mytopic",
+          "group": "mygroup", 
+        }                
+    }
+}
+```
+
+#### REST Service Object
+
+**EXAMPLE**
+```json
+{
+  "service": {
+        "type": "rest",
+        "connectstring":"type=POST;url=http://localhost:50000/dummy/post",
+        "username": "myusername",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
+    }
+}
+```
+
+#### SQL Database Object
+
+**EXAMPLE**
+```json
+{
+  "service": {
+        "type": "rest",
+        "connectstring":"jdbc:oracle:thin:@localhost:1521/XE",
+        "username": "myusername",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",    
+    }
+}
+```
 
 #### Checks Object
 The checks object is a map of [Check Objects]({{< ref "#check-object" >}})
@@ -109,18 +160,18 @@ maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Req
 active | String | activate (TRUE) /deactivate (FALSE) a test case. Per default a testing tool will set a test case always as activated and execute it once, the test case was deployed.
 
 #### Checks
-```text
-{
-    "checks": [ "kafka:check1", "kafka:check2", "oracle:check1"]
-}
-```
 
 A set of `checkids`, describing the checks executed after the inject was triggered.
 
 **EXAMPLE**
 ```json
-
+{
+    "checks": [ "kafka:check1", "kafka:check2", "oracle:check1"]
+}
 ```
+
+
+
 
 #### Check Type Definition
 The Open-Test-API supports the following types of validation:
@@ -200,6 +251,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
 value | [[Replacement Value]({{< ref "#replacement-value" >}}) ] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
+maxlength | Integer | 
 
 #### Replacement value 
 The description of a single value looks as follows
@@ -266,75 +318,13 @@ A more complex example combines several generators:
     "key" : "#key1#",
     "value": [{
         "order": 1,
-        "list": "v1|v2|v3|v5"
+        "list": "v1_0|v2_|v3_|v5_00"
     },{
         "order": 2,
-        "regex": "^_[0-9]{2}$"
-    }]            
+        "regex": "^[0-9]{2}$"
+    }],
+    "maxlength":5
 }]
 ```
 This will pick a value out of the list "v1, v2, v3, v5" and append a random value between 0 and 99.  
 
-#### Kafka Service Object
-
-FIELD NAME   | TYPE          | DESCRIPTION
------------- | ------------- | -------------
-broker | String | **Required** The url of the kafka broker, you will connect to.
-user | String | In case of authentification, the username.
-password | Base64String | The password for the authentification.
-topic | String | The topic you want connect to.
-group | String | If your consumes data from a topic, you have to define a group id. Keep in mind: Don't use the same consumer group, which is already in use by other service. Otherwise, your testing system will steel messages from your other system. Best practice: Create an own consumer group only for testing purposes with minimal rights. 
-header | [Filename]({{< ref "#filename" >}}) | In case your System under test requires a kafka header to work, place it here. 
-
-**EXAMPLE**
-```json
-{
-    "kafka": {
-        "broker":"myservername",
-        "username": "myusername",
-        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
-        "topic": "mytopic",
-        "group": "mygroup",
-        "header" : "myExampleHeader.json"        
-    }
-}
-```
-
-#### REST Service Object
-
-FIELD NAME   | TYPE          | DESCRIPTION
------------- | ------------- | -------------
-url | String |
-user | String |
-password | Base64String |
-header | [Filename]({{< ref "#filename" >}}) |
-
-```json
-{
-    "rest": {
-        "url":"type=POST;url=http://localhost:50000/dummy/post",
-        "username": "myusername",
-        "password": "mypassword",        
-        "header" : "load_from_file.json"        
-    }
-}
-```
-
-#### SQL Database Object
-
-FIELD NAME   | TYPE          | DESCRIPTION
------------- | ------------- | -------------
-connect | String |
-user | String |
-password | Base64String |
-header | [Filename]({{< ref "#filename" >}}) |
-
-```json
-{
-    "database": {
-        "connect":"jdbc:oracle:thin:@localhost:1521/XE",
-        "username": "myusername",
-        "password": "mypassword"        
-    }
-}
-```
