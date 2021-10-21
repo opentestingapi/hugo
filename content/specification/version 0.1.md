@@ -77,29 +77,37 @@ randomgenerator | [Random Generator Object]({{< ref "#random-generator-object" >
 
 #### Service Object
 
-A SUT can have several interfaces to interact.
-Services can be part as well as of Injects and Checks.
+A SUT can have several interfaces for interaction. The OpenTestAPI defines a common approach to interact with different service interfaces. 
+Therefore, OpenTestingAPI defines a common and a custom configuration part. The custom configuration  
 
-A service has the following fields
+The common service configuration part looks as follows
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 type | String | **Required** The definition of the service type.
-connectstring | String | **Required** The connect string for the service
+connectstring | String | **Required** The connect string for the service. Usually, this will be an Url. However, its also possible to interact via other interfaces, e.g. files.
 user | String | In case of authentication, the username.
 password | Base64String | The password for the authentication.
 custom | [(String, String)] | A service can have custom configurations, e.g. topics etc. The custom list allows the simple configuration via key/value pairs. 
 
-The current state of the Open-Test-API supports the following services:
+At this moment, the OpenTestAPI supports the following services:
+
+| Service    | Type-String | DESCRIPTION
+------------ | ------------- | -------------
+[Kafka]({{< ref "#kafka-service-object" >}}) | kafka| <a href="https://kafka.apache.org/">Apache Kafka</a> is an often used technology for asynchronous communication and data stream processing. The SUT communicates via topics with its environments.
+[SQL Database]({{< ref "#sql-database-object" >}}) | database | Connect to SQL Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
+[REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
+
+
+#### Kafka Service Object
+
+Addition / Custom Fields:
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-Kafka | [Kafka Service Object]({{< ref "#kafka-service-object" >}}) | Apache Kafka is a framework implementation of a software bus using stream-processing.
-SQL Database | [Database Service Object]({{< ref "#sql-database-object" >}}) | | 
-REST | [REST Service Object]({{< ref "#rest-service-object" >}}) | |
-cassandra | |
+topic | String | **Required** The topic to inject data / consumer data from.
+group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is  
 
-#### Kafka Service Object
 
 **EXAMPLE**
 ```json
@@ -117,33 +125,46 @@ cassandra | |
 }
 ```
 
-#### REST Service Object
-
-**EXAMPLE**
-```json
-{
-  "service": {
-        "type": "rest",
-        "connectstring":"type=POST;url=http://localhost:50000/dummy/post",
-        "username": "myusername",
-        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
-    }
-}
-```
-
 #### SQL Database Object
 
+The connectstring for SQL databases follows the <a href="https://docs.oracle.com/cd/E17952_01/connector-j-8.0-en/connector-j-reference-jdbc-url-format.html">JDBC Url</a> syntax.
+The Url string consists of a protocol-, host-, database- and properties definition. 
+
 **EXAMPLE**
 ```json
 {
   "service": {
-        "type": "rest",
+        "type": "database",
         "connectstring":"jdbc:oracle:thin:@localhost:1521/XE",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",    
     }
 }
 ```
+
+#### REST Service Object
+
+Addition / Custom Fields:
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+methode | String | HTTP-Methode, which has to be performed. 
+
+**EXAMPLE**
+```json
+{
+  "service": {
+        "type": "rest",
+        "connectstring":"http://localhost:50000/dummy/post",
+        "username": "myusername",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
+        "custom": {
+          "methode": "post"     
+        }
+  }
+}
+```
+
 
 #### Checks Object
 The checks object is a map of [Check Objects]({{< ref "#check-object" >}})
