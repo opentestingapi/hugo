@@ -18,9 +18,12 @@ initiative and the
 
 ## Introduction
 
-## Specification
-### Schema
-#### OpenTestAPI Object
+The OpenTestAPI specification is a project to describe and document tests cases in a machine-(and human-)readable format. 
+The specification defines a set of files to describe a test case. 
+Creation and execution of the test cases can be done by utilities. 
+
+## Schema Specification
+### OpenTestAPI Object
 
 This is the root document object for the API specification. 
 It combines resource listing and API declaration together into one document.
@@ -33,7 +36,7 @@ description | String | The informal description of the test case.
 injections | [Injections Object]({{< ref "#injections-object" >}}) | The set of injection objects, part of this testcase.
 checks | [Checks Object]({{< ref "#checks-object" >}}) | The set of check objects, part of this testcase.  
 
-#### TestAPI Version String
+### TestAPI Version String
 The version string signifies the version of the TestAPI Specification that the document complies to. 
 The format for this string must be major.minor. 
 
@@ -42,7 +45,7 @@ A major.minor shall be used to designate the TestAPI Specification version, and 
 In subsequent versions of the TestAPI Specification, care will be given such that increments of the minor version should not interfere with operations of tooling developed to a lower minor version. 
 Thus a hypothetical 1.1 specification should be usable with tooling designed for 1.0.
 
-#### Identifier
+### Identifier
 This field represents a unique universal identifier.
 The format is in general free, but it can be used to package test cases to testsuites.
 Good practice is to follow the URI format, according to <a href="https://tools.ietf.org/html/rfc3986">RFC3986</a>.
@@ -60,10 +63,10 @@ Good practice is to follow the URI format, according to <a href="https://tools.i
 ```
 
 
-#### Injections Object
+### Injections Object
 The injects object is a map of [Injection Objects]({{< ref "#injection-object" >}})
 
-#### Injection Object
+### Injection Object
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
@@ -75,7 +78,7 @@ timetolive | [Time Duration Object]({{< ref "#time-duration-object" >}}) | Based
 sourcefile | [Filename]({{< ref "#filename" >}}) | The data source for the inject. The complete data of this file will be taken ans input for the SUT.
 randomgenerator | [Random Generator Object]({{< ref "#random-generator-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values thrue the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
 
-#### Service Object
+### Service Object
 
 A SUT can have several interfaces for interaction. The OpenTestAPI defines a common approach to interact with different service interfaces. 
 Therefore, OpenTestingAPI defines a common and a custom configuration part. The custom configuration  
@@ -99,7 +102,7 @@ At this moment, the OpenTestAPI supports the following services:
 [REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
 
 
-#### Kafka Service Object
+### Kafka Service Object
 
 Addition / Custom Fields:
 
@@ -125,7 +128,7 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
 }
 ```
 
-#### SQL Database Object
+### SQL Database Object
 
 The connectstring for SQL databases follows the <a href="https://docs.oracle.com/cd/E17952_01/connector-j-8.0-en/connector-j-reference-jdbc-url-format.html">JDBC Url</a> syntax.
 The Url string consists of a protocol-, host-, database- and properties definition. 
@@ -142,13 +145,13 @@ The Url string consists of a protocol-, host-, database- and properties definiti
 }
 ```
 
-#### REST Service Object
+### REST Service Object
 
 Addition / Custom Fields:
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-methode | String | HTTP-Methode, which has to be performed. 
+method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3">rfc7231</a>).
 
 **EXAMPLE**
 ```json
@@ -159,17 +162,17 @@ methode | String | HTTP-Methode, which has to be performed.
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
         "custom": {
-          "methode": "post"     
+          "method": "post"     
         }
   }
 }
 ```
 
 
-#### Checks Object
+### Checks Object
 The checks object is a map of [Check Objects]({{< ref "#check-object" >}})
 
-#### Check Object
+### Check Object
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
@@ -180,7 +183,7 @@ checktype | String | **Required** Check type defines, how to perform the output 
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
 active | String | activate (TRUE) /deactivate (FALSE) a test case. Per default a testing tool will set a test case always as activated and execute it once, the test case was deployed.
 
-#### Checks
+### Checks
 
 A set of `checkids`, describing the checks executed after the inject was triggered.
 
@@ -194,14 +197,14 @@ A set of `checkids`, describing the checks executed after the inject was trigger
 
 
 
-#### Check Type Definition
+### Check Type Definition
 The Open-Test-API supports the following types of validation:
 CHECK    |  DESCRIPTION
 ---------|  -------------
 EQUALS | The testing tool reports success if the output is equal to the expected output. 
 CONTAINS | The testing tool reports success if the output contains the expected output. 
 
-#### Cron Trigger
+### Cron Trigger
 
 The Cron Trigger is a comma-separated list of cron jobs. The cron job definition follows the UNIX cronjob definition (<a href="https://en.wikipedia.org/wiki/Cron">[Cron Job]</a>)
 
@@ -214,7 +217,7 @@ The following examples will trigger the data inject every hour 5 and 15 minutes 
 }
 ```
 
-#### Filename
+### Filename
 
 The text content of file will be taken as the input for injects and/or checks. The filename can be fully-qualified/absolute path name or relative path to your data source. 
 It's a good practice to have the pathname relative to your testcase description, e.g. all data sourcefiles for a testcase are inside a directory together with the testcase.    
@@ -236,7 +239,7 @@ testcasedescription.JSON
 /testcase1/check1.txt
 /testcase1/check2.txt
 ```
-#### Time Duration Object
+### Time Duration Object
 
 A time duration MUST be a number bigger 0 representing the duration in seconds.
 For simplification, the following abbreviations are possible:
@@ -257,24 +260,24 @@ d | days
 }
 ```
 
-#### Random Generator Object
+### Random Generator Object
 It's possible to inject random generated data into the input object and validate the output object for this generated date. 
 All in all, with this approach its possible to trace objects during a complex SUT overall several subsystems. 
 A random generator object is a set of  
 
-#### Replacement Rules
+### Replacement Rules
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 replacements | [Replacement Rules]({{< ref "#replacement-rules" >}}) | A set of replacements.
 
-#### Replacement Rules
+### Replacement Rules
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
 value | [[Replacement Value]({{< ref "#replacement-value" >}}) ] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
 maxlength | Integer | 
 
-#### Replacement value 
+### Replacement value 
 The description of a single value looks as follows
 
 FIELD NAME   | TYPE          | DESCRIPTION
