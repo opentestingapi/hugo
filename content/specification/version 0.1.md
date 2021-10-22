@@ -350,5 +350,6 @@ A more complex example combines several generators:
     "maxlength":5
 }]
 ```
-This will pick a value out of the list "v1, v2, v3, v5" and append a random value between 0 and 99.  
+This will pick a value out of the list "v1_0, v2_, v3_, v5_00" and append a random value between 0 and 99. 
+The result will be cut at length 5, you will end up having only minor version 00 for v5 and minor version 00 to 09 for v1.  
 
