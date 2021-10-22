@@ -265,7 +265,7 @@ It's possible to inject random generated data into the input object and validate
 All in all, with this approach its possible to trace objects during a complex SUT overall several subsystems. 
 A random generator object is a set of  
 
-### Replacement Rules
+### Replacements
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 replacements | [Replacement Rules]({{< ref "#replacement-rules" >}}) | A set of replacements.
