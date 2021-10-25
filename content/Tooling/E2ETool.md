@@ -54,9 +54,11 @@ Communication should be API based, so we offer a huge list with API endpoints in
 
 #### Pipeline Integration
 For a pipeline integration you need a defined start time for test cases and the possibility to check the results later.
-API offers additional API endpoints to realize this "one-time-shot" feature as bulk execution of defined injects.
+API offers additional endpoints to realize this "one-time-shot" feature as bulk execution of defined injects.
 All subsequent injects/checks of the triggered injects are taken into account and the result can be determined on the basis of the bulk ID. 
 By the possibility to define checks as not mandatory, the behavior of the pipeline can be adapted accordingly.
+
+<a href="https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution">https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution</a>
 
 #### Templating
 Templating is not really a feature of the reference implementation, but here you can find a way to do it easily with the Linux shell.
