@@ -122,7 +122,7 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",        
         "custom": {
           "topic": "mytopic",
-          "group": "mygroup", 
+          "group": "mygroup"
         }                
     }
 }
@@ -140,7 +140,7 @@ The Url string consists of a protocol-, host-, database- and properties definiti
         "type": "database",
         "connectstring":"jdbc:oracle:thin:@localhost:1521/XE",
         "username": "myusername",
-        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",    
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ="    
     }
 }
 ```
@@ -162,7 +162,7 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
         "custom": {
-          "method": "post"     
+            "method": "post"     
         }
   }
 }

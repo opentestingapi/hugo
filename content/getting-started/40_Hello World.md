@@ -36,18 +36,20 @@ A test can contain several data injects, so its called `injections`.
         "injectid": "inject-kafka-1",
         "service" : {
             "type" : "kafka",
-            "broker" : "localhost:9092",
-            "topic" : "mytopic1"
-        }     
+            "connectstring":"localhost:9092",          
+            "custom": {
+                "topic": "mytopic"
+            },
+        },
         "checks" : [ "check-kafka-1" ],        
-        "trigger" : [ "0 * * * * ?"],
-        "sourcefile" : "source_kafka_1.txt"
+        "cron" : [ "0 * * * * ?"],
+        "sourcefile" : "./hello_world_test/kafka_inject_data_1.txt"
      }]
 ```
 * `injectid`: An identifier, e.g. to relate this inject-data with other actions
 * `service`: The `type` of the interface you to want to inject the test data. In our example it's a `kafka` service. `broker` and topic describes the technical connection to this interface, authentication is also possible.
 * `checks`: A list of checks, which should be performed after this inject was triggered
-* `trigger`: The time, when the test has to be executed. Yes, the time!  
+* `cron`: The time, when the test has to be executed. Yes, the time!  
 Usually, a test case will be fired and forget. In general, this is also possible (simple ignore the cron - it's not mandatory).
 We support this **cron** approach in order to have continuous testing - E2E systems should run continuously and also continuously tested.
 * `sourcefile`: The most important one! Your test data, which has to be injected into the input interface. 
@@ -65,12 +67,13 @@ The corresponding check looks as follows:
       "checkid" : "check-kafka-1",
       "service" : {
           "type" : "kafka",
-          "broker" : "localhost:9092",
-          "topic" : "mytopic1",
-          "group" : "e2etests",
-      }
-      "expectedfile" : "check_kafka_1.txt",
-      "expectedtype": "contains",      
+          "connectstring":"localhost:9092",
+          "custom": {
+              "topic": "mytopic",
+              "group": "mygroup"
+      },
+      "expectedfile" : "./hello_world_test/kafka_check_data_1.txt",
+      "checktype": "contains",      
       "maxwaittime" : "10m"
   }]
 ```
@@ -80,7 +83,15 @@ The corresponding check looks as follows:
 ```text
 dlrow olleh
 ```
-* `expectedtype`: We expect that the message inside the topic looks like the one from the expected file. The kafka message should `contains` our text.
+* `checktype`: We expect that the message inside the topic looks like the one from the expected file. The kafka message should `contains` our text.
 * `maxwaittime`: How to check in a (real) real environment, where several process can run. 
 We can not say, when the SUT will process our input. We only can say, it should not take longer as a certain time. 
  So, we have to define this maxtime to expect our date.   
+
+Finally, your testcase will look as follows on your local environment:
+```shell
+./hello_world_test.JSON
+./hello_world_test/
+./hello_world_test/kafka_inject_data_1.txt
+./hello_world_test/kafka_check_data_1.txt
+```

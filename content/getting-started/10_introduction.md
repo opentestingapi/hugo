@@ -5,12 +5,11 @@ weight: 10
 ---
 
 **A typical modern application development**: 
-* A modern architectures often build of several (up to hundreds) of connected services with huge amount of different technologies for communication and persistence
+* A modern architectures is often build of several (up to hundreds) of connected services with huge amount of different technologies for communication and persistence
 {{< figure src="/img/MicroserviceArchitecture.png" alt="Example" width="600px" >}}
 * Typical system- and integration test are build by developers using the technology, which is the base for the service implementation. 
 * In best case End-to-End testing (E2E) is done by dedicated testers using standard tools sticking to a few technologies. 
 * Typical E2E Tests are one time shots: Start, Run, Destroy 
-
 
 
 **Drawbacks of the current approach**:
