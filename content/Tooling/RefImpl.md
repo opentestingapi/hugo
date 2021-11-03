@@ -61,8 +61,9 @@ By the possibility to define checks as not mandatory, the behavior of the pipeli
 <a href="https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution">https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution</a>
 
 #### Preventing the locking of credentials
-We have introduced a cache to stop repeating execution of wrong credentials. It can be disabled using the feature toggle in the properties. 
+We have introduced a cache to stop repeating execution of wrong credentials.
 Locked credentials could be simply unlocked by re-uploading the test case.
+It can be disabled using the feature toggle in the properties, this can be useful for tests during non-zero-downtime deployments.
 
 #### Templating
 Templating is not really a feature of the reference implementation, but here you can find a way to do it easily with the Linux shell.
