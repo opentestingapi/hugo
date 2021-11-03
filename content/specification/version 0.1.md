@@ -10,6 +10,8 @@ weight: 10
 
 # OpenTestAPI Specification
 
+<a href="../OpenTestApiSchema_v0.1.json">[Download JSON Schema Specification]</a>
+
 ## Disclaimer
 Part of this content has been taken from the great work done by the folks at the
 <a href="https://www.asyncapi.com/docs/getting-started">[AsyncAPI]</a> 
@@ -33,8 +35,8 @@ FIELD NAME   | TYPE          | DESCRIPTION
 testapi | [Version String]({{< ref "#testapi-version-string" >}}) | **Required** Specifies the TestAPI version. Can be used by clients to interpret the version. 
 id | [Identifier]({{< ref "#identifier" >}}) | Identifier of the test case, which will be delivered.   
 description | String | The informal description of the test case.  
-injections | [Injections Object]({{< ref "#injections-object" >}}) | The set of injection objects, part of this testcase.
-checks | [Checks Object]({{< ref "#checks-object" >}}) | The set of check objects, part of this testcase.  
+injections | [[Injection Object]]({{< ref "#injections-object" >}}) | The set of injection objects, part of this testcase.
+checks | [[Check Object]]({{< ref "#check-object" >}}) | The set of check objects, part of this testcase.  
 
 ### TestAPI Version String
 The version string signifies the version of the TestAPI Specification that the document complies to. 
@@ -62,21 +64,17 @@ Good practice is to follow the URI format, according to <a href="https://tools.i
 }
 ```
 
-
-### Injections Object
-The injects object is a map of [Injection Objects]({{< ref "#injection-object" >}})
-
 ### Injection Object
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 injectid |  [Identifier]({{< ref "#identifier" >}}) | **Required** A unique Identifier, which allows to connect an inject with several checks.   
 service |  [Service Object]({{< ref "#service-object" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
-checks | [Checks]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
-cron | [Cron Triggers]({{< ref "#cron trigger" >}}) | The execution time of a job
+checks | [[Checks]]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
+cron | [[Cron Trigger]]({{< ref "#cron-trigger" >}}) | The execution time of a job
 timetolive | [Time Duration Object]({{< ref "#time-duration-object" >}}) | Based on the continuous execution approach, a test case will be executed endless. `timtolive` defines how long the test cases has to be executed by the test tool once it was started. If nothing is defined, the assumption will be that the test cases is executed endless based on the cron job. 
 sourcefile | [Filename]({{< ref "#filename" >}}) | The data source for the inject. The complete data of this file will be taken ans input for the SUT.
-randomgenerator | [Random Generator Object]({{< ref "#random-generator-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values thrue the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
+replacement | [Replacement Object]({{< ref "#replacement-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values through the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
 
 ### Service Object
 
@@ -168,10 +166,6 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
 }
 ```
 
-
-### Checks Object
-The checks object is a map of [Check Objects]({{< ref "#check-object" >}})
-
 ### Check Object
 
 FIELD NAME   | TYPE          | DESCRIPTION
@@ -260,17 +254,18 @@ d | days
 }
 ```
 
-### Random Generator Object
+### Replacement Object
 It's possible to inject random generated data into the input object and validate the output object for this generated date. 
-All in all, with this approach its possible to trace objects during a complex SUT overall several subsystems. 
-A random generator object is a set of  
 
-### Replacements
+With this, it's possible to trace objects during a complex SUT overall several subsystems.
+
+A replacement object is a set of  
+
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-replacements | [Replacement Rules]({{< ref "#replacement-rules" >}}) | A set of replacements.
+replacements | [[Replacement Rule]]({{< ref "#replacement-rule" >}}) | A set of replacements.
 
-### Replacement Rules
+### Replacement Rule
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
