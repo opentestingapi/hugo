@@ -172,10 +172,31 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 checkid | [Identifier]({{< ref "#identifier" >}}) | **Required** A unique ID for the check.
 service | [Services]({{< ref "#service" >}})  | **Required** the service (interfaces), which will be used to check the testing data.
-expectedfile | [Filename]({{< ref "#filename" >}}) | The data source for the check object. The complete data of this file will be taken ans output validation for the SUT.
-checktype | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, ... . See [Check Type Definition]({{< ref "#check-type-definition" >}}) 
+validations | [[Validation Object]]({{< ref "#validation" >}})  | **Required** the validation, which define the check
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
 active | String | activate (TRUE) /deactivate (FALSE) a check. Per default a testing tool will set a check always as activated and execute it once, the inject referenced it.
+
+### Validation Object
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
+query | [Filename]({{< ref "#filename" >}}) | The data source for the query object. The file contains the request, which has to be executed. In case of a SQL DB System its an SQL query. 
+result | [[Filename]({{< ref "#filename" >}}) ] | **Required** The data source for the validation object. The complete data of this file will be taken as output validation for the SUT.
+type | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, ... . See [Check Type Definition]({{< ref "#check-type-definition" >}})
+
+**EXAMPLE**
+```json
+{
+  "validations" : [{
+        "order": 1,
+        "query": "check_postgresql_param_1.sql",
+        "type": "containsOneOf",
+        "result": [ "expected_result_test1.txt", "expected_result_test2.txt"]        
+      }
+  ]
+}
+```
 
 ### Checks
 
