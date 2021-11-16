@@ -65,6 +65,9 @@ We have introduced a cache to stop repeating execution of wrong credentials.
 Locked credentials could be simply unlocked by re-uploading the test case.
 It can be disabled using the feature toggle in the properties, this can be useful for tests during non-zero-downtime deployments.
 
+#### Tracing
+TraceID from Brave is stored for every check and can be exported, Zipkin configuration is available.
+
 #### Templating
 Templating is not really a feature of the reference implementation, but here you can find a way to do it easily with the Linux shell.
 For example, Connect information of the different stages can be managed and reused externally.
