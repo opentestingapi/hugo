@@ -181,18 +181,18 @@ active | String | activate (TRUE) /deactivate (FALSE) a check. Per default a tes
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
-query | [Filename]({{< ref "#filename" >}}) | The data source for the query object. The file contains the request, which has to be executed. In case of a SQL DB System its an SQL query. 
-result | [[Filename]({{< ref "#filename" >}}) ] | **Required** The data source for the validation object. The complete data of this file will be taken as output validation for the SUT.
-type | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, ... . See [Check Type Definition]({{< ref "#check-type-definition" >}})
+request | [Filename]({{< ref "#filename" >}}) | The file contains the request object (inside a file), which has to be executed on the inject interface. In case of a SQL DB System its an SQL query. 
+response | [[Filename]({{< ref "#filename" >}}) ] | **Required** The data source for the expected response object. 
+type | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, CONTAINSNOT, CONTAINSONEOF... . See [Check Type Definition]({{< ref "#check-type-definition" >}})
 
 **EXAMPLE**
 ```json
 {
   "validations" : [{
         "order": 1,
-        "query": "check_postgresql_param_1.sql",
+        "request": "check_postgresql_param_1.sql",
         "type": "containsOneOf",
-        "result": [ "expected_result_test1.txt", "expected_result_test2.txt"]        
+        "response": [ "expected_result_test1.txt", "expected_result_test2.txt"]        
       }
   ]
 }
@@ -217,7 +217,9 @@ The Open-Test-API supports the following types of validation:
 CHECK    |  DESCRIPTION
 ---------|  -------------
 EQUALS | The testing tool reports success if the output is equal to the expected output. 
-CONTAINS | The testing tool reports success if the output contains the expected output. 
+CONTAINS | The testing tool reports success if all output files contain valid output. 
+CONTAINSNOT | The testing tool reports success if the output does not contain the expected output.
+CONTAINSONEOF | The testing tool reports success if one of the response files contains the expected output
 
 ### Cron Trigger
 
