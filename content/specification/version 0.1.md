@@ -96,7 +96,8 @@ At this moment, the OpenTestAPI supports the following services:
 | Service    | Type-String | DESCRIPTION
 ------------ | ------------- | -------------
 [Kafka]({{< ref "#kafka-service-object" >}}) | kafka| <a href="https://kafka.apache.org/">Apache Kafka</a> is an often used technology for asynchronous communication and data stream processing. The SUT communicates via topics with its environments.
-[SQL Database]({{< ref "#sql-database-object" >}}) | database | Connect to SQL Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
+[JDBC Database]({{< ref "#jdbc-database-object" >}}) | jdbc | Connect to JDBC Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
+[Cassandra Database]({{< ref "#cassandra-database-object" >}}) | cassandra | Connect to Cassandra Database 
 [REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
 
 
@@ -126,7 +127,7 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
 }
 ```
 
-### SQL Database Object
+### JDBC Database Object
 
 The connectstring for SQL databases follows the <a href="https://docs.oracle.com/cd/E17952_01/connector-j-8.0-en/connector-j-reference-jdbc-url-format.html">JDBC Url</a> syntax.
 The Url string consists of a protocol-, host-, database- and properties definition. 
@@ -135,8 +136,24 @@ The Url string consists of a protocol-, host-, database- and properties definiti
 ```json
 {
   "service": {
-        "type": "database",
+        "type": "jdbc",
         "connectstring":"jdbc:oracle:thin:@localhost:1521/XE",
+        "username": "myusername",
+        "password": "dW5zZWN1cmUgcGFzc3dvcmQ="    
+    }
+}
+```
+
+### Cassandra Database Object
+
+Please use server:port to specify the target cluster.
+
+**EXAMPLE**
+```json
+{
+  "service": {
+        "type": "cassandra",
+        "connectstring":"cassandra-db:9042",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ="    
     }
