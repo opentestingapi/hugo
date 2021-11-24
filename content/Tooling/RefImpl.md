@@ -33,6 +33,10 @@ You can fork our project, but you need to take care of new versions and API upda
 
 ## Features
 
+Available Adapters: <a href="https://github.com/opentestingapi/impl_java#adapters">https://github.com/opentestingapi/impl_java#adapters</a> 
+
+Random Data Generator: <a href="https://github.com/opentestingapi/impl_java#random-data-generator">https://github.com/opentestingapi/impl_java#random-data-generator</a> 
+
 In addition to the main functions defined in the API, the reference implementation provides some extensions:
 
 #### Metrics and Grafana Dashboard
