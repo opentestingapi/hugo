@@ -47,11 +47,11 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.TOKEN }}
-          external_repository: <username>/<username>.github.io
+          personal_token: ${{ secrets.GITHUBACTIONTOKEN }}
+          external_repository: opentestingapi/opentestingapi.github.io
           publish_dir: ./public
           #   keep_files: true
-          user_name: <username>
-          user_email: <username@email.com>
+          user_name: Robert Diers
+          user_email: robertdiers@gmail.com
           publish_branch: master
         #   cname: example.com
