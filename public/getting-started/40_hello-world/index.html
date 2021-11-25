@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Hello World - OpenTestAPI</title>
+<meta name="description" content="Application Testing for Everyone">
+<meta name="generator" content="Hugo 0.80.0" />
+<link href="https://example.com/index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="https://example.com/getting-started/40_hello-world/">
+<link rel="stylesheet" href="https://example.com/css/theme.min.css">
+<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://example.com/css/chroma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script src="https://example.com/js/bundle.js"></script><style>
+:root {}
+</style>
+<meta property="og:title" content="Hello World" />
+<meta property="og:description" content="Let&rsquo;s start with a simple test case example. In general a testcase consist of 2 sections, a section describing the input for our system under test (SUT) and a section describing the output validation. In addition, a few meta information to identify the test case has to be added. With this, a minimal test cases frame looks like:
+{ &#34;testapi&#34;: &#34;0.1&#34;, &#34;id&#34;: &#34;hello_world_test&#34;, &#34;description&#34;: &#34;my first hello world test, showing how its working&#34;, &#34;injections&#34;: [ ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/getting-started/40_hello-world/" />
+<meta property="og:image" content="https://example.com/images/og-image.png"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/images/og-image.png"/>
+
+<meta name="twitter:title" content="Hello World"/>
+<meta name="twitter:description" content="Let&rsquo;s start with a simple test case example. In general a testcase consist of 2 sections, a section describing the input for our system under test (SUT) and a section describing the output validation. In addition, a few meta information to identify the test case has to be added. With this, a minimal test cases frame looks like:
+{ &#34;testapi&#34;: &#34;0.1&#34;, &#34;id&#34;: &#34;hello_world_test&#34;, &#34;description&#34;: &#34;my first hello world test, showing how its working&#34;, &#34;injections&#34;: [ ."/>
+<meta itemprop="name" content="Hello World">
+<meta itemprop="description" content="Let&rsquo;s start with a simple test case example. In general a testcase consist of 2 sections, a section describing the input for our system under test (SUT) and a section describing the output validation. In addition, a few meta information to identify the test case has to be added. With this, a minimal test cases frame looks like:
+{ &#34;testapi&#34;: &#34;0.1&#34;, &#34;id&#34;: &#34;hello_world_test&#34;, &#34;description&#34;: &#34;my first hello world test, showing how its working&#34;, &#34;injections&#34;: [ .">
+
+<meta itemprop="wordCount" content="563">
+<meta itemprop="image" content="https://example.com/images/og-image.png"/>
+
+
+
+<meta itemprop="keywords" content="" />
+</head>
+<body><div class="container"><header>
+<h1>OpenTestAPI</h1><span class="version">Version 1.0</span>
+<p class="description">Application Testing for Everyone</p>
+
+</header>
+<div class="global-menu">
+<nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/about/">About</a></li><li class="parent"><a href="">Specification<i class="fas fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li class="child"><a href="/specification/version-1.0/">Version 1.0</a></li>
+</ul>
+</li><li class="parent"><a href="">Tooling<i class="fas fa-angle-right"></i></a>
+<ul class="sub-menu">
+<li class="child"><a href="/tooling/refimpl/">Reference Implementation</a></li>
+</ul>
+</li></ul>
+</nav>
+</div>
+<div class="content-container">
+<main><h1>Hello World</h1>
+<p>Let&rsquo;s start with a simple test case example.
+In general a testcase consist of 2 sections, a section describing the input for our system under test (SUT) and a section describing the output validation.
+In addition, a few meta information to identify the test case has to be added. With this, a minimal test cases frame looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;testapi&#34;</span>: <span style="color:#e6db74">&#34;0.1&#34;</span>,
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;hello_world_test&#34;</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;my first hello world test, showing how its working&#34;</span>,
+  <span style="color:#f92672">&#34;injections&#34;</span>: [
+    <span style="color:#960050;background-color:#1e0010">...</span>
+  ],
+  <span style="color:#f92672">&#34;checks&#34;</span>: [
+    <span style="color:#960050;background-color:#1e0010">...</span>
+  ]
+}
+</code></pre></div><ul>
+<li>
+<p><code>testapi</code> : Version of the opentestapi your test case is written in.</p>
+</li>
+<li>
+<p><code>id</code> : A testing tool can manage test cases using this identifier.</p>
+</li>
+<li>
+<p><code>description</code>: We humans usually need some help. Let&rsquo;s add a short description for us.</p>
+</li>
+<li>
+<p><strong>Input</strong>: Test data are injected into an interface, whatever type it is off. So input is just an injection.
+A test can contain several data injects, so its called <code>injections</code>.</p>
+</li>
+<li>
+<p><strong>Output</strong>: The system output has to be validated - we check the out. And we will not do one check, we allow several. So it' <code>checks</code>.</p>
+</li>
+</ul>
+<h2 id="injections">Injections</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    <span style="color:#e6db74">&#34;injections&#34;</span> <span style="color:#960050;background-color:#1e0010">:</span> [
+     {
+        <span style="color:#f92672">&#34;injectid&#34;</span>: <span style="color:#e6db74">&#34;inject-kafka-1&#34;</span>,
+        <span style="color:#f92672">&#34;service&#34;</span> : {
+            <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;kafka&#34;</span>,
+            <span style="color:#f92672">&#34;connectstring&#34;</span>:<span style="color:#e6db74">&#34;localhost:9092&#34;</span>,          
+            <span style="color:#f92672">&#34;custom&#34;</span>: {
+                <span style="color:#f92672">&#34;topic&#34;</span>: <span style="color:#e6db74">&#34;mytopic&#34;</span>
+            },
+        },
+        <span style="color:#f92672">&#34;checks&#34;</span> : [ <span style="color:#e6db74">&#34;check-kafka-1&#34;</span> ],        
+        <span style="color:#f92672">&#34;cron&#34;</span> : [ <span style="color:#e6db74">&#34;0 * * * * ?&#34;</span>],
+        <span style="color:#f92672">&#34;sourcefile&#34;</span> : <span style="color:#e6db74">&#34;./hello_world_test/kafka_inject_data_1.txt&#34;</span>
+     }]
+</code></pre></div><ul>
+<li><code>injectid</code>: An identifier, e.g. to relate this inject-data with other actions</li>
+<li><code>service</code>: The <code>type</code> of the interface you to want to inject the test data. In our example it&rsquo;s a <code>kafka</code> service. <code>broker</code> and topic describes the technical connection to this interface, authentication is also possible.</li>
+<li><code>checks</code>: A list of checks, which should be performed after this inject was triggered</li>
+<li><code>cron</code>: The time, when the test has to be executed. Yes, the time!<br>
+Usually, a test case will be fired and forget. In general, this is also possible (simple ignore the cron - it&rsquo;s not mandatory).
+We support this <strong>cron</strong> approach in order to have continuous testing - E2E systems should run continuously and also continuously tested.</li>
+<li><code>sourcefile</code>: The most important one! Your test data, which has to be injected into the input interface.
+In the hello world example the file &lsquo;source_kafka_1.txt&rsquo; contains</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">hello world
+</code></pre></div><h2 id="checks">Checks</h2>
+<p>Let&rsquo;s now check, if your system under test processed everything in the right way.
+Let&rsquo;s assume the system is loading the data from Kafka inverts the input and write it to another topic.
+The corresponding check looks as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;checks&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+  {
+      <span style="color:#f92672">&#34;checkid&#34;</span> : <span style="color:#e6db74">&#34;check-kafka-1&#34;</span>,
+      <span style="color:#f92672">&#34;service&#34;</span> : {
+          <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#e6db74">&#34;kafka&#34;</span>,
+          <span style="color:#f92672">&#34;connectstring&#34;</span>:<span style="color:#e6db74">&#34;localhost:9092&#34;</span>,
+          <span style="color:#f92672">&#34;custom&#34;</span>: {
+              <span style="color:#f92672">&#34;topic&#34;</span>: <span style="color:#e6db74">&#34;mytopic&#34;</span>,
+              <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;mygroup&#34;</span>
+      },
+      <span style="color:#f92672">&#34;expectedfile&#34;</span> : <span style="color:#e6db74">&#34;./hello_world_test/kafka_check_data_1.txt&#34;</span>,
+      <span style="color:#f92672">&#34;checktype&#34;</span>: <span style="color:#e6db74">&#34;contains&#34;</span>,      
+      <span style="color:#f92672">&#34;maxwaittime&#34;</span> : <span style="color:#e6db74">&#34;10m&#34;</span>
+  }<span style="color:#960050;background-color:#1e0010">]</span>
+</code></pre></div><ul>
+<li><code>checkid</code>: The identifier for this check</li>
+<li><code>service</code>: The interface, which has to be checked. The approach is the same as on the inject.</li>
+<li><code>expectedfile</code>: The expected output of the process is written in &ldquo;check_kafka_1.txt&rdquo;. As mentioned, we expect the topic contains once the following message:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">dlrow olleh
+</code></pre></div><ul>
+<li><code>checktype</code>: We expect that the message inside the topic looks like the one from the expected file. The kafka message should <code>contains</code> our text.</li>
+<li><code>maxwaittime</code>: How to check in a (real) real environment, where several process can run.
+We can not say, when the SUT will process our input. We only can say, it should not take longer as a certain time.
+So, we have to define this maxtime to expect our date.</li>
+</ul>
+<p>Finally, your testcase will look as follows on your local environment:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./hello_world_test.JSON
+./hello_world_test/
+./hello_world_test/kafka_inject_data_1.txt
+./hello_world_test/kafka_check_data_1.txt
+</code></pre></div><div class="edit-meta">
+
+<br><a href="https://github.com/thingsym/hugo-theme-techdoc/edit/master/content/getting-started/40_Hello%20World.md" class="edit-page"><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="https://example.com/getting-started/30_whyanapi/" title="Why a Testing API?"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - Why a Testing API?</a>
+<a class="nav nav-next" href="https://example.com/tooling/" title="Toolings">Next - Toolings <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main>
+<div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="https://example.com">Home</a></li>
+
+<li class="parent"><a href="https://example.com/getting-started/">Getting Started</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://example.com/getting-started/10_introduction/">Introduction</a></li>
+<li class=""><a href="https://example.com/getting-started/20_e2etesting/">End-To-End Testing</a></li>
+<li class=""><a href="https://example.com/getting-started/30_whyanapi/">Why a Testing API?</a></li>
+<li class="active"><a href="https://example.com/getting-started/40_hello-world/">Hello World</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="https://example.com/tooling/">Toolings</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://example.com/tooling/refimpl/">Reference Implementation</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="https://example.com/specification/">Specifications</a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://example.com/specification/version-1.0/">Version 1.0</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

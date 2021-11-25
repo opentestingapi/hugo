@@ -1,8 +1,8 @@
-baseURL = "https://example.com"
+baseURL = "https://opentestingapi.github.io/"
 
 languageCode = "en-us"
 DefaultContentLanguage = "en"
-title = "OpenTestAPI"
+title = "OpenTestingAPI"
 theme = "hugo-theme-techdoc"
 
 hasCJKLanguage = true
