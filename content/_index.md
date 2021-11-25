@@ -4,9 +4,9 @@ description: Text about this post
 
 ---
 
-# OpenTestAPI
+# OpenTestingAPI
 
-The OpenTestAPI is an open source initiative to harmonise the testing process over modern platforms. 
+The OpenTestingAPI is an open source initiative to harmonise the testing process over modern platforms. 
 Goal is to establish a standard for testing definition which can easily be used with several tools, supporting backend and frontend development.
 
 ## Features
