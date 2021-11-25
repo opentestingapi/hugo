@@ -24,8 +24,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Update theme
+        # (Optional)If you have the theme added as submodule, you can pull it and use the most updated version
+        run: git submodule update --init --recursive
 
-      # Hugo Build
       - name: Hugo setup
         # You may pin to the exact commit or the version.
         # uses: peaceiris/actions-hugo@2e89aa66d0093e4cd14751b3028fc1a179452c2e
@@ -35,3 +38,20 @@ jobs:
           #hugo-version: # optional, default is latest
           # Download (if necessary) and use Hugo extended version. Example: true
           #extended: # optional, default is false
+
+      - name: Build
+        # remove --minify tag if you do not need it
+        # docs: https://gohugo.io/hugo-pipes/minification/
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.TOKEN }}
+          external_repository: <username>/<username>.github.io
+          publish_dir: ./public
+          #   keep_files: true
+          user_name: <username>
+          user_email: <username@email.com>
+          publish_branch: master
+        #   cname: example.com
