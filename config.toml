@@ -15,9 +15,9 @@ enableMissingTranslationPlaceholders = false
 [params]
 
     # Source Code repository section
-    description = "Application testing for everyone"
+    description = "Application Testing for Everyone"
 
-    version = "0.0.1"
+    version = "1.0"
 
     # Documentation repository section
     # documentation repository (set edit link to documentation repository)

@@ -1,16 +1,16 @@
 ---
 date: 2021-10-11
-linktitle: Version 0.1
+linktitle: Version 1.0
 menu:
   main:
     parent: Specification
-title: Version 0.1
+title: Version 1.0
 weight: 10
 ---
 
 # OpenTestAPI Specification
 
-<a href="../OpenTestApiSchema_v0.1.json">[Download JSON Schema Specification]</a>
+<a href="../OpenTestApiSchema_v1.0.json">[Download JSON Schema Specification]</a>
 
 ## Disclaimer
 Part of this content has been taken from the great work done by the folks at the
@@ -99,6 +99,8 @@ At this moment, the OpenTestAPI supports the following services:
 [JDBC Database]({{< ref "#jdbc-database-object" >}}) | jdbc | Connect to JDBC Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
 [Cassandra Database]({{< ref "#cassandra-database-object" >}}) | cassandra | Connect to Cassandra Database 
 [REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
+
+<b>ATTENTION: Do NOT use any technologies effecting business process, for example queues!</b>
 
 
 ### Kafka Service Object
