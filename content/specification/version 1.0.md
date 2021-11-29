@@ -340,6 +340,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 now | String | Value will be the current timestamp (+an additional delay) in the given format. Parameter (param) accepts (+[delay]({{< ref "#time-duration-object" >}}))
 list | String | List of Pipe ("\|") separated values, which can be picked randomly for the value. The values are grabbed evenly distributed. 
 regex | String | Random generated value matching the regular expression
+inheritfrom | String | Inherit from different Inject (InjectID as value) with same #key#
 file | [Filename]({{< ref "#filename" >}}) | The file contains a set of values, which are randomly chosen. One value per line.
 
 
