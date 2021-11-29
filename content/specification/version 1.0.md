@@ -267,6 +267,7 @@ The following examples will trigger the data inject every hour 5 and 15 minutes 
 
 The text content of file will be taken as the input for injects and/or checks. The filename can be name only or relative path to your data source. 
 It's a good practice to have the files next to your testcase description, e.g. all data sourcefiles for a testcase are inside a directory together with the testcase.    
+Within test case definition you MUST use the filename only, as implementation is not aware of storage type and folders - upload will use filename only!
 
 **EXAMPLE**
 With relative path `./`
