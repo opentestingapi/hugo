@@ -121,10 +121,16 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
         "connectstring":"mykafkabroker.com",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",        
-        "custom": {
-          "topic": "mytopic",
-          "group": "mygroup"
-        }                
+        "custom": [
+            {
+                "key": "topic",
+                "value": "mytopic"
+            },
+            {
+                "key": "group",
+                "value": "mygroup"
+            }
+        ]             
     }
 }
 ```
@@ -178,9 +184,12 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
         "connectstring":"http://localhost:50000/dummy/post",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
-        "custom": {
-            "method": "post"     
-        }
+        "custom": [
+            {
+                "key": "method",
+                "value": "post"
+            }
+        ]   
   }
 }
 ```
@@ -321,6 +330,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
 type | String | Defines the way how to generate random values. Type and its parameters are described in the next table. 
+value | String | Defines the spedific definition how to generate random values. 
 param | String | Parameter object for the random generator.
 
 The following types are supported by the OpenTestApi Definition
@@ -341,8 +351,10 @@ A simple timestamp example:
 "replacements" : [
 {
     "key" : "#key1#",
-    "value": [{        
-        "now": "yyyy-MM-dd HH:mm:ss",
+    "value": [{   
+        "order": 1,
+        "type": "now",    
+        "value": "yyyy-MM-dd HH:mm:ss",
         "param" : "+1h"
     }]   
 }]
@@ -355,7 +367,9 @@ This will generate a replacement value, which generates a timestamp with one hou
 {
     "key" : "#key1#",
     "value": [{        
-        "list": "v1|v2|v3|v5"
+        "order": 1,
+        "type": "list",    
+        "value": "v1|v2|v3|v5"
     }]   
 }]
 ```
@@ -366,7 +380,9 @@ The generator will pick random one of the values out of the list given as param.
 {
     "key" : "#key1#",
     "value": [{        
-        "regex": "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+        "order": 1,
+        "type": "regex",    
+        "value": "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
     }],        
 }]
 ```
@@ -379,10 +395,12 @@ A more complex example combines several generators:
     "key" : "#key1#",
     "value": [{
         "order": 1,
-        "list": "v1_0|v2_|v3_|v5_00"
+        "type": "list",    
+        "value": "v1_0|v2_|v3_|v5_00"
     },{
         "order": 2,
-        "regex": "^[0-9]{2}$"
+        "type": "regex",    
+        "value": "^[0-9]{2}$"
     }],
     "maxlength":5
 }]
