@@ -110,7 +110,7 @@ Addition / Custom Fields:
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 topic | String | **Required** The topic to inject data / consumer data from.
-group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is  
+group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is required. 
 
 
 **EXAMPLE**
