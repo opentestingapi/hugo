@@ -332,7 +332,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
 type | String | Defines the way how to generate random values. Type and its parameters are described in the next table. 
-value | String | Defines the spedific definition how to generate random values. 
+value | String | Defines the specific definition how to generate random values. 
 param | String | Parameter object for the random generator.
 
 The following types are supported by the OpenTestApi Definition
