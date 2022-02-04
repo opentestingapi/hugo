@@ -71,6 +71,7 @@ The corresponding check looks as follows:
           "custom": {
               "topic": "mytopic",
               "group": "mygroup"
+          }
       },
       "expectedfile" : "./hello_world_test/kafka_check_data_1.txt",
       "checktype": "contains",      
