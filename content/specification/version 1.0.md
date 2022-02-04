@@ -211,7 +211,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
 request | [Filename]({{< ref "#filename" >}}) | The file contains the request object (inside a file), which has to be executed on the inject interface. In case of a SQL DB System its an SQL query. 
-response | [[Filename]({{< ref "#filename" >}}) ] | **Required** The data source for the expected response object. 
+response | [[Filename]({{< ref "#filename" >}})] | **Required** The data source for the expected response object. 
 type | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, CONTAINSNOT, CONTAINSONEOF... . See [Check Type Definition]({{< ref "#check-type-definition" >}})
 
 **EXAMPLE**
