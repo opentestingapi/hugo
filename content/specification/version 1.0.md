@@ -322,7 +322,7 @@ replacements | [[Replacement Rule]]({{< ref "#replacement-rule" >}}) | A set of 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
-value | [[Replacement Value]({{< ref "#replacement-value" >}}) ] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
+value | [[Replacement Value]({{< ref "#replacement-value" >}})] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
 maxlength | Integer | 
 
 ### Replacement value 
