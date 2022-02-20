@@ -37,6 +37,7 @@ id | [Identifier]({{< ref "#identifier" >}}) | Identifier of the test case, whic
 description | String | The informal description of the test case.  
 injections | [[Injection Object]]({{< ref "#injections-object" >}}) | The set of injection objects, part of this testcase.
 checks | [[Check Object]]({{< ref "#check-object" >}}) | The set of check objects, part of this testcase.  
+labels | String Array | labels applied to the test case, used for additional features like search
 
 ### TestAPI Version String
 The version string signifies the version of the TestAPI Specification that the document complies to. 
@@ -110,7 +111,7 @@ Addition / Custom Fields:
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 topic | String | **Required** The topic to inject data / consumer data from.
-group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is  
+group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is required. 
 
 
 **EXAMPLE**
@@ -121,10 +122,16 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
         "connectstring":"mykafkabroker.com",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",        
-        "custom": {
-          "topic": "mytopic",
-          "group": "mygroup"
-        }                
+        "custom": [
+            {
+                "key": "topic",
+                "value": "mytopic"
+            },
+            {
+                "key": "group",
+                "value": "mygroup"
+            }
+        ]             
     }
 }
 ```
@@ -178,9 +185,12 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
         "connectstring":"http://localhost:50000/dummy/post",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
-        "custom": {
-            "method": "post"     
-        }
+        "custom": [
+            {
+                "key": "method",
+                "value": "post"
+            }
+        ]   
   }
 }
 ```
@@ -201,7 +211,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
 request | [Filename]({{< ref "#filename" >}}) | The file contains the request object (inside a file), which has to be executed on the inject interface. In case of a SQL DB System its an SQL query. 
-response | [[Filename]({{< ref "#filename" >}}) ] | **Required** The data source for the expected response object. 
+response | [[Filename]({{< ref "#filename" >}})] | **Required** The data source for the expected response object. 
 type | String | **Required** Check type defines, how to perform the output validation. Valid values are EQUALS, CONTAINS, CONTAINSNOT, CONTAINSONEOF... . See [Check Type Definition]({{< ref "#check-type-definition" >}})
 
 **EXAMPLE**
@@ -257,6 +267,7 @@ The following examples will trigger the data inject every hour 5 and 15 minutes 
 
 The text content of file will be taken as the input for injects and/or checks. The filename can be name only or relative path to your data source. 
 It's a good practice to have the files next to your testcase description, e.g. all data sourcefiles for a testcase are inside a directory together with the testcase.    
+Within test case definition you MUST use the filename only, as implementation is not aware of storage type and folders - upload will use filename only!
 
 **EXAMPLE**
 With relative path `./`
@@ -311,7 +322,7 @@ replacements | [[Replacement Rule]]({{< ref "#replacement-rule" >}}) | A set of 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 key | String | The key defining the replacement object. The testing tool will look for this key to replace it by the random generated value. 
-value | [[Replacement Value]({{< ref "#replacement-value" >}}) ] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
+value | [[Replacement Value]({{< ref "#replacement-value" >}})] | A comma separated list of values for the replacement, the concatenation of this list will be the replacement value.
 maxlength | Integer | 
 
 ### Replacement value 
@@ -321,6 +332,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 order | Number | A JSON List object has per default no order. In order to sort the sub value generation an order ID is introduced. This parameter is optional.
 type | String | Defines the way how to generate random values. Type and its parameters are described in the next table. 
+value | String | Defines the specific definition how to generate random values. 
 param | String | Parameter object for the random generator.
 
 The following types are supported by the OpenTestApi Definition
@@ -330,6 +342,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 now | String | Value will be the current timestamp (+an additional delay) in the given format. Parameter (param) accepts (+[delay]({{< ref "#time-duration-object" >}}))
 list | String | List of Pipe ("\|") separated values, which can be picked randomly for the value. The values are grabbed evenly distributed. 
 regex | String | Random generated value matching the regular expression
+inheritfrom | String | Inherit from different Inject (InjectID as value) with same #key#
 file | [Filename]({{< ref "#filename" >}}) | The file contains a set of values, which are randomly chosen. One value per line.
 
 
@@ -341,8 +354,10 @@ A simple timestamp example:
 "replacements" : [
 {
     "key" : "#key1#",
-    "value": [{        
-        "now": "yyyy-MM-dd HH:mm:ss",
+    "value": [{   
+        "order": 1,
+        "type": "now",    
+        "value": "yyyy-MM-dd HH:mm:ss",
         "param" : "+1h"
     }]   
 }]
@@ -355,7 +370,9 @@ This will generate a replacement value, which generates a timestamp with one hou
 {
     "key" : "#key1#",
     "value": [{        
-        "list": "v1|v2|v3|v5"
+        "order": 1,
+        "type": "list",    
+        "value": "v1|v2|v3|v5"
     }]   
 }]
 ```
@@ -366,7 +383,9 @@ The generator will pick random one of the values out of the list given as param.
 {
     "key" : "#key1#",
     "value": [{        
-        "regex": "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
+        "order": 1,
+        "type": "regex",    
+        "value": "^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$"
     }],        
 }]
 ```
@@ -379,10 +398,12 @@ A more complex example combines several generators:
     "key" : "#key1#",
     "value": [{
         "order": 1,
-        "list": "v1_0|v2_|v3_|v5_00"
+        "type": "list",    
+        "value": "v1_0|v2_|v3_|v5_00"
     },{
         "order": 2,
-        "regex": "^[0-9]{2}$"
+        "type": "regex",    
+        "value": "^[0-9]{2}$"
     }],
     "maxlength":5
 }]

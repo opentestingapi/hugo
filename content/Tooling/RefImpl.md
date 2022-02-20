@@ -35,8 +35,6 @@ You can fork our project, but you need to take care of new versions and API upda
 
 Available Adapters: <a href="https://github.com/opentestingapi/impl_java#adapters">https://github.com/opentestingapi/impl_java#adapters</a> 
 
-Random Data Generator: <a href="https://github.com/opentestingapi/impl_java#random-data-generator">https://github.com/opentestingapi/impl_java#random-data-generator</a> 
-
 In addition to the main functions defined in the API, the reference implementation provides some extensions:
 
 #### Metrics and Grafana Dashboard
@@ -63,6 +61,12 @@ All subsequent injects/checks of the triggered injects are taken into account an
 By the possibility to define checks as not mandatory, the behavior of the pipeline can be adapted accordingly.
 
 <a href="https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution">https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution</a>
+
+#### JUnit Integration
+You can use Testcontainers to startup our ref implementation during test phase with JUnit.
+Using this approach it is possible to write system and system integrations tests with OpenTestingAPI!
+
+<a href="https://github.com/opentestingapi/impl_java_testcontainers">https://github.com/opentestingapi/impl_java_testcontainers</a>
 
 #### Preventing the locking of credentials
 We have introduced a cache to stop repeating execution of wrong credentials.
