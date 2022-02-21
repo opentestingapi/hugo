@@ -62,6 +62,12 @@ By the possibility to define checks as not mandatory, the behavior of the pipeli
 
 <a href="https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution">https://github.com/opentestingapi/impl_java#pipeline-integration--bulk-execution</a>
 
+#### JUnit Integration
+You can use Testcontainers to startup our ref implementation during test phase with JUnit.
+Using this approach it is possible to write system and system integrations tests with OpenTestingAPI!
+
+<a href="https://github.com/opentestingapi/impl_java_testcontainers">https://github.com/opentestingapi/impl_java_testcontainers</a>
+
 #### Preventing the locking of credentials
 We have introduced a cache to stop repeating execution of wrong credentials.
 Locked credentials could be simply unlocked by re-uploading the test case.
