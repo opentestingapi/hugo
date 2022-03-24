@@ -26,7 +26,7 @@ In addition, a few meta information to identify the test case has to be added. W
 * `description`: We humans usually need some help. Let's add a short description for us.
 
 * **Input**: Test data are injected into an interface, whatever type it is off. So input is just an injection. 
-A test can contain several data injects, so its called `injections`.
+A test can contain several data injects, so its called `injections`. You might prefer the word 'event' :-)
 * **Output**: The system output has to be validated - we check the out. And we will not do one check, we allow several. So it' `checks`.
 
 ## Injections 
