@@ -68,6 +68,8 @@ Using this approach it is possible to write system and system integrations tests
 
 <a href="https://github.com/opentestingapi/impl_java_testcontainers">https://github.com/opentestingapi/impl_java_testcontainers</a>
 
+BTW <a href="https://github.com/opentestingapi/impl_java/tree/master/src/test/java/org/opentesting/devenv">Here</a> you can find a cool example to startup a local development environment powered by Testcontainers.
+
 #### Preventing the locking of credentials
 We have introduced a cache to stop repeating execution of wrong credentials.
 Locked credentials could be simply unlocked by re-uploading the test case.
