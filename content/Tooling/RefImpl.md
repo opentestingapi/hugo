@@ -21,7 +21,7 @@ There are 3 options for use:
 #### Dockerhub Container (preferred usage)
 You can use all of the preexisting adapters, no need to deal with source code itself.
 
-<a href="https://hub.docker.com/repository/docker/robertdiers/opentesting">https://hub.docker.com/repository/docker/robertdiers/opentesting</a> 
+<a href="https://github.com/opentestingapi/impl_java/pkgs/container/opentesting">https://github.com/opentestingapi/impl_java/pkgs/container/opentesting</a> 
 
 #### Extend the always latest version in retrospect
 You can use all of the preexisting adapters, implement custom ones and inject into the latest source code as an addon.
