@@ -69,7 +69,8 @@ Good practice is to follow the URI format, according to <a href="https://tools.i
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-injectid |  [Identifier]({{< ref "#identifier" >}}) | **Required** A unique Identifier, which allows to connect an inject with several checks.   
+injectid |  [Identifier]({{< ref "#identifier" >}}) | **Required** A unique Identifier, which allows to connect an inject with several checks.  
+description | String | The informal description of the test case inject.   
 service |  [Service Object]({{< ref "#service-object" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
 checks | [[Checks]]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
 cron | [[Cron Trigger]]({{< ref "#cron-trigger" >}}) | The execution time of a job
@@ -200,6 +201,7 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 checkid | [Identifier]({{< ref "#identifier" >}}) | **Required** A unique ID for the check.
+description | String | The informal description of the test case check.  
 service | [Services]({{< ref "#service" >}})  | **Required** the service (interfaces), which will be used to check the testing data.
 validations | [[Validation Object]]({{< ref "#validation" >}})  | **Required** the validation, which define the check
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
