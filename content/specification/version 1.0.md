@@ -176,7 +176,7 @@ Addition / Custom Fields:
 
 FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
-method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3">rfc7231</a>).
+type | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3">rfc7231</a>).
 
 **EXAMPLE**
 ```json
@@ -188,7 +188,7 @@ method | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
         "custom": [
             {
-                "key": "method",
+                "key": "type",
                 "value": "post"
             }
         ]   
