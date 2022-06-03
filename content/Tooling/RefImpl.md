@@ -18,7 +18,7 @@ Repository:
 
 There are 3 options for use:
 
-#### Dockerhub Container (preferred usage)
+#### Container (preferred usage)
 You can use all of the preexisting adapters, no need to deal with source code itself.
 
 <a href="https://github.com/opentestingapi/impl_java/pkgs/container/opentesting">https://github.com/opentestingapi/impl_java/pkgs/container/opentesting</a> 
