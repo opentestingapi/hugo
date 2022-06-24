@@ -114,7 +114,9 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 topic | String | **Required** The topic to inject data / consumer data from.
 group | String | Kafka uses consumer groups to cooperate consumers of one topic. The SUT and the testing tool will consume data from the same topic. For this, a dedicated testing group is required. 
-
+security.protocol | String | required when using user and password
+sasl.mechanism | String | required when using user and password
+login.module | String | required when using user and password
 
 **EXAMPLE**
 ```json
@@ -122,8 +124,8 @@ group | String | Kafka uses consumer groups to cooperate consumers of one topic.
     "service": {
         "type": "kafka",
         "connectstring":"mykafkabroker.com",
-        "username": "myusername",
-        "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",        
+        "username": "",
+        "password": "",        
         "custom": [
             {
                 "key": "topic",
