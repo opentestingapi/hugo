@@ -101,6 +101,7 @@ At this moment, the OpenTestAPI supports the following services:
 [JDBC Database]({{< ref "#jdbc-database-object" >}}) | jdbc | Connect to JDBC Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
 [Cassandra Database]({{< ref "#cassandra-database-object" >}}) | cassandra | Connect to Cassandra Database 
 [REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
+[S3]({{< ref "#s3-service-object" >}}) | s3 | Connect a S3.
 
 <b>ATTENTION: Do NOT use any technologies effecting business process, for example queues!</b>
 
@@ -186,6 +187,34 @@ type | String | HTTP-method, which has to be performed, e.g. GET, POST (see <a h
         "connectstring":"http://localhost:50000/dummy/post",
         "username": "myusername",
         "password": "dW5zZWN1cmUgcGFzc3dvcmQ=",
+        "custom": [
+            {
+                "key": "type",
+                "value": "post"
+            }
+        ]   
+  }
+}
+```
+
+### S3 Service Object
+
+Addition / Custom Fields:
+
+FIELD NAME   | TYPE          | DESCRIPTION
+------------ | ------------- | -------------
+region | String | S3 region
+bucketName | String | Bucket name
+fileName | String | Filename
+
+**EXAMPLE**
+```json
+{
+  "service": {
+        "type": "s3",
+        "connectstring":"s3-serviceEndpoint",
+        "username": "myaccesskey",
+        "password": "mysecretaccesskey",
         "custom": [
             {
                 "key": "type",
