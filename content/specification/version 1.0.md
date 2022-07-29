@@ -132,7 +132,7 @@ login.module | String | required when using user and password
                 "value": "mytopic"
             },
             {
-                "key": "group",
+                "key": "group.id",
                 "value": "mygroup"
             }
         ]             
