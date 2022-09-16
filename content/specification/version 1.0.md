@@ -1,5 +1,5 @@
 ---
-date: 2021-10-11
+date: 2022-09-16
 linktitle: Version 1.0
 menu:
   main:
@@ -305,7 +305,7 @@ Within test case definition you MUST use the filename only, as implementation is
 **EXAMPLE**
 With relative path `./`
 ```
-/testcase1/testcasedescription.JSON
+/testcase1/testcasedescription.json
 /testcase1/inject1.txt
 /testcase1/inject2.txt
 /testcase1/check1.txt
@@ -313,7 +313,7 @@ With relative path `./`
 ```
 or with relative path `testcase1/`
 ```
-testcasedescription.JSON
+testcasedescription.json
 /testcase1/inject1.txt
 /testcase1/inject2.txt
 /testcase1/check1.txt
@@ -444,3 +444,6 @@ A more complex example combines several generators:
 This will pick a value out of the list "v1_0, v2_, v3_, v5_00" and append a random value between 0 and 99. 
 The result will be cut at length 5, you will end up having only minor version 00 for v5 and minor version 00 to 09 for v1.  
 
+### YML support (optional)
+For readability, we recommend supporting the YML format. 
+However, conversion can also be done as an upstream step, so this feature is optional.

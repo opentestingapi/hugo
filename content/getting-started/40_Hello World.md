@@ -91,7 +91,7 @@ We can not say, when the SUT will process our input. We only can say, it should 
 
 Finally, your testcase will look as follows on your local environment:
 ```shell
-./hello_world_test.JSON
+./hello_world_test.json
 ./hello_world_test/
 ./hello_world_test/kafka_inject_data_1.txt
 ./hello_world_test/kafka_check_data_1.txt
