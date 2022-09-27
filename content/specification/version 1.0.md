@@ -98,8 +98,8 @@ At this moment, the OpenTestAPI supports the following services:
 | Service    | Type-String | DESCRIPTION
 ------------ | ------------- | -------------
 [Kafka]({{< ref "#kafka-service-object" >}}) | kafka| <a href="https://kafka.apache.org/">Apache Kafka</a> is an often used technology for asynchronous communication and data stream processing. The SUT communicates via topics with its environments.
-[JDBC Database]({{< ref "#jdbc-database-object" >}}) | jdbc | Connect to JDBC Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
-[Cassandra Database]({{< ref "#cassandra-database-object" >}}) | cassandra | Connect to Cassandra Database 
+[JDBC Database]({{< ref "#jdbc-service-object" >}}) | jdbc | Connect to JDBC Databases, e.g. PostgreSQL, MariaDB, Oracle DB 
+[Cassandra Database]({{< ref "#cassandra-service-object" >}}) | cassandra | Connect to Cassandra Database 
 [REST]({{< ref "#rest-service-object" >}}) | rest | Connect a service via HTTP Requests.
 [S3]({{< ref "#s3-service-object" >}}) | s3 | Connect a S3.
 
@@ -140,7 +140,7 @@ login.module | String | required when using user and password
 }
 ```
 
-### JDBC Database Object
+### JDBC Service Object
 
 The connectstring for SQL databases follows the <a href="https://docs.oracle.com/cd/E17952_01/connector-j-8.0-en/connector-j-reference-jdbc-url-format.html">JDBC Url</a> syntax.
 The Url string consists of a protocol-, host-, database- and properties definition. 
@@ -157,7 +157,7 @@ The Url string consists of a protocol-, host-, database- and properties definiti
 }
 ```
 
-### Cassandra Database Object
+### Cassandra Service Object
 
 Please use server:port to specify the target cluster.
 
@@ -237,6 +237,7 @@ service | [Services]({{< ref "#service" >}})  | **Required** the service (interf
 validations | [[Validation Object]]({{< ref "#validation" >}})  | **Required** the validation, which define the check
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
 active | String | activate (TRUE) /deactivate (FALSE) a check. Per default a testing tool will set a check always as activated and execute it once, the inject referenced it.
+mandatory | String | mandatory (TRUE) /optional (FALSE) check. Chained checks and injects are stopped if a mandatory check fails, for optional ones it will continue.
 
 ### Validation Object
 
