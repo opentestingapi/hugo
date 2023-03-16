@@ -283,8 +283,10 @@ equals | The testing tool reports success if the output is equal to the expected
 contains | The testing tool reports success if all output files contain valid output. 
 containsnot | The testing tool reports success if the output does not contain the expected output.
 containsoneof | The testing tool reports success if one of the response files contains the expected output.
-regex | The testing tool reports success if the output matches the expected regex. (API v1.1)
+regex | The testing tool reports success if the output matches the expected regex.[^1] (API v1.1)
 jsonschema | The testing tool reports success if the output matches the expected JSON schemata. (API v1.1)
+
+[^1]: You might want to use an Online tool first to escape your content before adding real regex, otherwise you will fail with special characters.
 
 ### Cron Trigger
 
