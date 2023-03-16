@@ -286,7 +286,7 @@ containsoneof | The testing tool reports success if one of the response files co
 regex | The testing tool reports success if the output matches the expected regex. (API v1.1)
 jsonschema | The testing tool reports success if the output matches the expected JSON schemata. (API v1.1)
 
-> You might want to use an Online tool first to escape your content before adding real regex, otherwise you will fail with special characters.
+> Hint regex: You might want to use an Online tool first to escape your content before adding real regex, otherwise you will fail with special characters.
 
 ### Cron Trigger
 
