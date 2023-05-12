@@ -233,7 +233,7 @@ FIELD NAME   | TYPE          | DESCRIPTION
 ------------ | ------------- | -------------
 checkid | [Identifier]({{< ref "#identifier" >}}) | **Required** A unique ID for the check.
 description | String | The informal description of the test case check.  
-service | [Services]({{< ref "#service" >}})  | **Required** the service (interfaces), which will be used to check the testing data.
+service | [Services]({{< ref "#service-object" >}})  | **Required** the service (interfaces), which will be used to check the testing data.
 validations | [[Validation Object]]({{< ref "#validation-object" >}})  | **Required** the validation, which define the check
 maxwaitime | [Time Duration Object]({{< ref "#time-duration-object" >}}) | **Required** This defines the maximum time a testing tools has to wait before it marks a check as failed. If the expected output arrives in the timeframe (inject-start, maxwaitime) the test will be reported as success.
 active | String | activate (TRUE, default) /deactivate (FALSE) a check. Per default a testing tool will set a check always as activated and execute it once, the inject referenced it.
