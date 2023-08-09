@@ -46,7 +46,7 @@ The format for this string must be major.minor.
 A major.minor shall be used to designate the TestAPI Specification version, and will be considered compatible with the TestAPI Specification specified by that major.minor version. 
 
 In subsequent versions of the TestAPI Specification, care will be given such that increments of the minor version should not interfere with operations of tooling developed to a lower minor version. 
-Thus a hypothetical 1.1 specification should be usable with tooling designed for 1.0.
+Thus a hypothetical 1.10 specification should be usable with tooling designed for 1.0.
 
 ### Identifier
 This field represents a unique universal identifier.

@@ -74,7 +74,7 @@ description | String | The informal description of the test case inject.
 service |  [Service Object]({{< ref "#service-object" >}})  | **Required** the service (interfaces), which will be used to inject the testing data. 
 checks | [[Checks]]({{< ref "#checks" >}}) | A set of `checkids`, describing the checks executed after the inject was triggered. 
 cron | [[Cron Trigger]]({{< ref "#cron-trigger" >}}) | The execution time of a job
-executions | Integer | The amount of execution (default: 1), can be used for load scenarios or counting based on pre-existing random data in pool.
+executions | Integer | The amount of execution (default: 1), can be used for load scenarios or counting based on pre-existing random data in pool. (API 1.3)
 timetolive | [Time Duration Object]({{< ref "#time-duration-object" >}}) | Based on the continuous execution approach, a test case will be executed endless. `timtolive` defines how long the test cases has to be executed by the test tool once it was started. If nothing is defined, the assumption will be that the test cases is executed endless based on the cron job. 
 sourcefile | [Filename]({{< ref "#filename" >}}) | The data source for the inject. The complete data of this file will be taken ans input for the SUT.
 replacement | [Replacement Object]({{< ref "#replacement-object" >}}) | It's possible to inject random generated data into the input object. If the testing tool supports the feature, it is also possible to trace the random generated values through the test case. That is, once a random value was generated, it can be used inside the output check for validation.  
