@@ -22,3 +22,11 @@ Goal is to establish a standard for testing definition which can easily be used 
 * **Custom Pipeline integration**: Use bulk execution feature of our reference implementation to create your custom solution
 
 Due to the compatibility with JUnit and the use of Testcontainers we can work with OpenTestingApi tests directly after the module test phase. Other test suites can be integrated via API - but the biggest advantage is the easy integration into existing pipelines as JUnit test.
+
+## Changelog
+
+* 1.3: Support multiple injection executions using 'executions' parameter (can be used to solve count requirements)
+* 1.2: Intervall parameter for check execution
+* 1.1: Checks support regex and JSON schema
+* 1.0: Initial version
+
