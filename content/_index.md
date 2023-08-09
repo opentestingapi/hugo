@@ -25,6 +25,7 @@ Due to the compatibility with JUnit and the use of Testcontainers we can work wi
 
 ## Changelog
 
+* 1.4: support inject-inject chaining
 * 1.3: Support multiple injection executions using 'executions' parameter (can be used to solve count requirements)
 * 1.2: Intervall parameter for check execution
 * 1.1: Checks support regex and JSON schema
