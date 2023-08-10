@@ -460,7 +460,7 @@ The result will be cut at length 5, you will end up having only minor version 00
 For readability, we recommend supporting the YML format. 
 However, conversion can also be done as an upstream step, so this feature is optional.
 
-A inheritfrom example of inject inject-rest-2 in YML using an different key:
+A inheritfrom example of inject inject-rest-2 in YML using a different key:
 ```yml
 replacements:
       - key: "#RANDOMVALUE2#"
