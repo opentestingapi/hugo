@@ -10,7 +10,7 @@ weight: 15
 
 # OpenTestAPI Specification
 
-<a href="../OpenTestApiSchema_v1.4.json">[Download JSON Schema Specification 1.4]</a>
+<a href="../OpenTestApiSchema_v1.5.json">[Download JSON Schema Specification 1.5]</a>
 
 ## Disclaimer
 Part of this content has been taken from the great work done by the folks at the
