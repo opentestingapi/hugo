@@ -32,7 +32,8 @@ jobs:
       - name: Hugo setup
         # You may pin to the exact commit or the version.
         # uses: peaceiris/actions-hugo@2e89aa66d0093e4cd14751b3028fc1a179452c2e
-        uses: peaceiris/actions-hugo@v2.4.13
+        # uses: peaceiris/actions-hugo@v2.4.13
+        uses: peaceiris/actions-hugo@v3.0.0
         #with:
           # The Hugo version to download (if necessary) and use. Example: 0.58.2
           #hugo-version: # optional, default is latest
@@ -44,14 +45,16 @@ jobs:
         # docs: https://gohugo.io/hugo-pipes/minification/
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.GITHUBACTIONTOKEN }}
-          external_repository: opentestingapi/opentestingapi.github.io
-          publish_dir: ./public
-          #   keep_files: true
-          user_name: Robert Diers
-          user_email: robertdiers@gmail.com
-          publish_branch: master
-        #   cname: example.com
+# right now we can do that manually...
+#      - name: Deploy
+#        uses: peaceiris/actions-gh-pages@v4
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          # personal_token: ${{ secrets.GITHUBACTIONTOKEN }}
+#          external_repository: opentestingapi/opentestingapi.github.io
+#          publish_dir: ./public
+#          #   keep_files: true
+#          user_name: Robert Diers
+#          user_email: robertdiers@gmail.com
+#          publish_branch: master
+#        #   cname: example.com
