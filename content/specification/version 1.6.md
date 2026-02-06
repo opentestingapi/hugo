@@ -388,7 +388,7 @@ regex | String | Random generated value matching the regular expression
 inheritfrom | String | Inherit from different Inject (InjectID as value) with same #key# or different one using param attribute
 file | [Filename]({{< ref "#filename" >}}) | The file contains a set of values, which are randomly chosen. One value per line.
 addition | Double | use existing numeric data and do a math addition
-conversion | String | convert existing data to new data target type - available param options (we might add more target types on demand): int
+conversion | String | convert existing data to new data target type: int, decimal-x (x = amount of decimal places)
 
 Within a execution chain all data is available in every subcheck/inject, using inheritfrom it is possible to get data from other execution chains (typically this is usefull when using multiple injects with cron).
 
